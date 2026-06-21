@@ -18,7 +18,6 @@ class AppPages {
   AppPages._();
 
   static final pages = [
-    GetPage(name: Routes.splash, page: () => const SplashView()),
     GetPage(
       name: Routes.HOME,
       page: () => const HomeView(),

@@ -1,23 +1,32 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:news_app/app/data/services/theme_service.dart';
 
 class SettingsController extends GetxController {
-  //TODO: Implement SettingsController
+  final ThemeService _themeService = Get.find<ThemeService>();
 
-  final count = 0.obs;
+  final isDarkMode = false.obs;
+  final fontScale = 1.0.obs;
+
   @override
   void onInit() {
     super.onInit();
+    _loadPreferences();
   }
 
-  @override
-  void onReady() {
-    super.onReady();
+  Future<void> _loadPreferences() async {
+    isDarkMode.value = await _themeService.isDarkMode();
+    fontScale.value = await _themeService.getFontScale();
   }
 
-  @override
-  void onClose() {
-    super.onClose();
+  Future<void> toggleTheme(bool isDark) async {
+    isDarkMode.value = isDark;
+    await _themeService.setDarkMode(isDark);
+    Get.changeThemeMode(isDark ? ThemeMode.dark : ThemeMode.light);
   }
 
-  void increment() => count.value++;
+  Future<void> updateFontScale(double scale) async {
+    fontScale.value = scale;
+    await _themeService.setFontScale(scale);
+  }
 }

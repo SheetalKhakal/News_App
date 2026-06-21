@@ -1,23 +1,23 @@
 import 'package:get/get.dart';
+import 'package:news_app/app/routes/app_routes.dart';
+import 'package:news_app/app/utils/app_constants.dart';
 
 class HomeController extends GetxController {
-  //TODO: Implement HomeController
+  final categories = AppConstants.categories;
 
-  final count = 0.obs;
-  @override
-  void onInit() {
-    super.onInit();
+  void openCategory(NewsCategory category) {
+    Get.toNamed(Routes.CATEGORY, arguments: category);
   }
 
-  @override
-  void onReady() {
-    super.onReady();
+  void openSearch() {
+    Get.toNamed(Routes.SEARCH);
   }
 
-  @override
-  void onClose() {
-    super.onClose();
+  void openBookmarks() {
+    Get.toNamed(Routes.BOOKMARK);
   }
 
-  void increment() => count.value++;
+  void openSettings() {
+    Get.toNamed(Routes.SETTINGS);
+  }
 }
